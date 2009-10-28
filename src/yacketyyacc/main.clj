@@ -22,7 +22,9 @@
                  (submit-button "Shorten"))))
 
 (defn post-link [params]
-  (str "http://yacketyya.cc/" (random-string 5)))
+  (let [shortened (random-string 5)]
+    (url/create {:original_url (params :url) :shortened_url shortened})
+    (str "http://yacketyya.cc/" shortened)))
 
 (defroutes yacketyyacc
   (GET  "/" (index))

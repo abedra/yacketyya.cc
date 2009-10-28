@@ -3,7 +3,8 @@
 
 (def db {:classname "org.postgresql.Driver"
          :subprotocol "postgresql"
-         :subname "likestream_development"
-         :user "postgres"})
+         :subname "yacketyyacc"
+         :user "yacketyyacc"
+         :password "yacketyyacc"})
 
 (clj-record.core/init-model)
