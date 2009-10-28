@@ -1,5 +1,6 @@
 (ns yacketyyacc.main
-  (:use compojure))
+  (:use compojure)
+  (:require [yacketyyacc.models.url :as url]))
 
 (def chars (map char (concat (range 48 58) (range 66 92) (range 97 123))))
 
