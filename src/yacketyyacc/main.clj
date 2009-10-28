@@ -14,5 +14,15 @@
   [length]
   (apply str (take length (repeatedly random-char))))
 
+(defn index []
+  (html (form-to [:post "/"]
+                 [:label {:for "url"} "URL: "]
+                 (text-field "url")
+                 (submit-button "Shorten"))))
+
+(defn post-link [params]
+  (str "http://yacketyya.cc/" (random-string 5)))
+
 (defroutes yacketyyacc
-  (GET "/" (str "Random string " (random-string 5))))
+  (GET  "/" (index))
+  (POST "/" (post-link params)))
