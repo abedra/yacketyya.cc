@@ -1,5 +1,5 @@
 #!/bin/sh
-CLASSPATH=src:templates:test:config
+CLASSPATH=src
 
 for f in lib/*.jar; do
     CLASSPATH=$CLASSPATH:$f
