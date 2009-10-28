@@ -26,6 +26,10 @@
     (url/create {:original_url (params :url) :shortened_url shortened})
     (str "http://yacketyya.cc/" shortened)))
 
+(defn lookup-url [params]
+  (redirect-to ((url/find-by-slug (params :url)) :original_url)))
+
 (defroutes yacketyyacc
-  (GET  "/" (index))
-  (POST "/" (post-link params)))
+  (GET  "/"  (index))
+  (POST "/"  (post-link params))
+  (GET  "/:url" (lookup-url params)))

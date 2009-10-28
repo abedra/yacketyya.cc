@@ -8,3 +8,6 @@
          :password "yacketyyacc"})
 
 (clj-record.core/init-model)
+
+(defn find-by-slug [slug]
+  (first (find-by-sql ["select * from urls where shortened_url = ?", slug])))
