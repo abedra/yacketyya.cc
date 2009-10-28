@@ -1,0 +1,17 @@
+#!/bin/sh
+CLASSPATH=src:templates:config
+
+for f in lib/*.jar; do
+    CLASSPATH=$CLASSPATH:$f
+done
+
+if [ -f tmp/pids/daemon.pid ]; then
+  echo "The daemon is already running. Please stop it before starting again."
+  exit 1
+else
+  echo "Starting up"
+  java -cp $CLASSPATH clojure.main -i src/daemon.clj <&- & 
+  pid=$! 
+  echo ${pid} > tmp/pids/daemon.pid
+  echo "Startup complete"
+fi
