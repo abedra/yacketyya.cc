@@ -25,5 +25,10 @@
       </div>
       <div id="new-url"></div>
     </div>
+
+    <div id="totals">
+      <p>$total$ urls shorn to date, and many more to come!</p>
+      <p>Copyright &copy 2009 Aaron Bedra</p>
+    </div>
   </div>
 </div>
