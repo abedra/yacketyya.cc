@@ -129,5 +129,9 @@ form#url-shortener .button {
     text-align: center;
     width: 950px;
     margin: 0 auto;
+}
 
+#total-urls {
+    color: #00688D;
+    font-weight: bold;
 }
