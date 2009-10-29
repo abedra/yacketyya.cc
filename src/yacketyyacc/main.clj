@@ -4,10 +4,10 @@
   (:require [yacketyyacc.models.url :as url]))
 
 (defn index []
-  (render-template "index" {}))
+  (render-template "index" {:total (url/total-yaccs-shaven)}))
 
 (defn post-link [params]
-  (str "Your shortened url is: http://yacketyya.cc/" ((url/find-or-create (params :url)) :shortened_url)))
+  (render-template "new_url" {:shortened ((url/find-or-create (params :url)) :shortened_url)}))
 
 (defn lookup-url [params]
   (redirect-to ((url/find-by-slug (params :url)) :original_url)))

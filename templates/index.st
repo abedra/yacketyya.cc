@@ -20,10 +20,10 @@
             <input id="url" name="url" type="text" />
             <input type="button" value="Shave" id="submit" class="button" />
           </div>
+          <div class="clearfix"></div>
         </form>
-        <div id="new-url"></div>
       </div>
+      <div id="new-url"></div>
     </div>
-    <div class="push"></div>
   </div>
 </div>

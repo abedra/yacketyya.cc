@@ -17,6 +17,8 @@ a:visited { color: #0583f5; }
 
 em { font-style: italic;}
 
+.clearfix { clear: both; }
+
 /*- header
 ------------------------------------*/
 #header-wrap { 
@@ -87,6 +89,10 @@ em { font-style: italic;}
     padding-left: 1em;
 }
 
+form#url-shortener {
+    margin-top: 45px;
+}
+
 input#url {
     background-color: #eeeeee;
     border: 2px solid #A4C9D6;
@@ -107,4 +113,12 @@ form#url-shortener .button {
     text-decoration: none;
     width: 180px;
     float: left;
+}
+
+#new-url {
+    height: 60px;
+    padding-top: 50px;
+    font-size: 50px;
+    font-family: Helvetica, Tahoma, Arial;
+    margin-left: 10px;
 }

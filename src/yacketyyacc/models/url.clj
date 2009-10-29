@@ -29,4 +29,7 @@
   (let [lookup (first (find-by-sql ["select * from urls where original_url = ? limit 1", original_url]))]
     (if lookup
       lookup
-      (create {:original_url original_url :shortened_url (random-string 5)}))))
+      (create {:original_url original_url :shortened_url (random-string 4)}))))
+
+(defn total-yaccs-shaven []
+  ((first (find-by-sql ["select max(id) from urls"])) :max))
