@@ -6,7 +6,7 @@
         <ul>
           <li><a class="highlight" href="/about">What is Yackety Yacc?</a></li>
           <li><a class="highlight" href="/instructions">How do I use this?</a></li>
-          <li><a class="highlight" href="/contact">Holla at ya Boi</a></li>
+          <li><a class="highlight" href="/contact">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -16,9 +16,10 @@
     <div id="content">
       <div id="url-form">
         <form action="/" method="POST" id="url-shortener">
-          <label for="url">URL: </label>
-          <input id="url" name="url" type="text" />
-          <input type="button" value="Shorten" id="submit" />
+          <div id="input-container">
+            <input id="url" name="url" type="text" />
+            <input type="button" value="Shave" id="submit" class="button" />
+          </div>
         </form>
         <div id="new-url"></div>
       </div>
