@@ -12,8 +12,20 @@
 (defn lookup-url [params]
   (redirect-to ((url/find-by-slug (params :url)) :original_url)))
 
+(defn about []
+  (render-template "about" {}))
+
+(defn instructions []
+  (render-template "instructions" {}))
+
+(defn contact []
+  (render-template "contact" {}))
+
 (defroutes yacketyyacc
   (GET  "/"  (index))
   (POST "/"  (post-link params))
+  (GET  "/about" (about))
+  (GET  "/instructions" (instructions))
+  (GET  "/contact" (contact))
   (GET  "/:url" (lookup-url params))
   (GET  "/assets/*" (or (serve-file (params :*)) :next)))
