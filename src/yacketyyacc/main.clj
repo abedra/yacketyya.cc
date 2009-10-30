@@ -7,10 +7,12 @@
   (render-template "index" {:total (url/total-yaccs-shaven)}))
 
 (defn post-link [params]
-  (render-template "new_url" {:shortened ((url/find-or-create (params :url)) :shortened_url)}))
+  (render-plain-template "new_url" {:shortened ((url/find-or-create (params :url)) :shortened_url)}))
 
 (defn lookup-url [params]
-  (redirect-to ((url/find-by-slug (params :url)) :original_url)))
+  (let [url (url/find-by-slug (params :url))]
+    (url/update {:id (url :id) :clicks (+ (url :clicks) 1)})
+    (redirect-to (url :original_url))))
 
 (defn about []
   (render-template "about" {}))
