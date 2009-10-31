@@ -17,9 +17,7 @@
           <div id="top-nav">
             <ul>
               <li><a class="highlight" href="/about">What is Yackety Yacc?</a></li>
-              <li><a class="highlight" href="/instructions">How do I use this?</a></li>
               <li><a class="highlight" href="http://github.com/abedra/yacketyya.cc/issues">Found a Bug?</a></li>
-              <li><a class="highlight" href="/contact">Contact</a></li>
             </ul>
           </div>
         </div>

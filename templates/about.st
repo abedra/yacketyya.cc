@@ -6,8 +6,7 @@ experiment in the <a href="http://github.com/weavejester/compojure">
 Compojure Web Framework</a> powered by the wonderful <a href="clojure.org">Clojure</a> 
 language.</p>
 
-
-<p>Terms of Use:
+<p><b>Terms of Use:</b><br />
 Yackety Yacc is a free service meant for good, not spam.  Reports of
 abuse will cause your url to be removed without warning.  In other
 words, just play nice and you can have all the happy shortened urls
