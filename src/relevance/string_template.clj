@@ -19,7 +19,6 @@
   (def template-group (memoize template-group)))
 
 (defn populate-template [template-path attributes]
-  (log :info (str "Rendering template " template-path))
   (let [template (.getInstanceOf (template-group) template-path)]
     (doseq [[k v] (stringify-keys attributes)]
       (.setAttribute template (as-str k) v))

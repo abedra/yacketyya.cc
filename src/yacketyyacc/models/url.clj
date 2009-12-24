@@ -31,5 +31,5 @@
       lookup
       (create {:original_url original_url :shortened_url (random-string 4)}))))
 
-(defn total-yaccs-shaven []
+(defn total-yaccs-shorn []
   ((first (find-by-sql ["select max(id) from urls"])) :max))
