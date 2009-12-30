@@ -22,16 +22,18 @@
   [length]
   (apply str (take length (repeatedly random-char))))
 
+(defn find-by-original-url
+  [original_url]
+  (first (find-by-sql ["select * from urls where original_url = ?", original_url])))
+
 (defn find-by-slug
   [slug]
   (first (find-by-sql ["select * from urls where shortened_url = ?", slug])))
 
 (defn find-or-create
   [original_url]
-  (let [lookup (first (find-by-sql ["select * from urls where original_url = ?", original_url]))]
-    (if lookup
-      lookup
-      (create {:original_url original_url :shortened_url (random-string 4)}))))
+  (or (find-by-original-url original_url)
+      (create {:original_url original_url :shortened_url (random-string 4)})))
 
 (defn total-yaccs-shorn
   []
