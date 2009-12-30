@@ -9,6 +9,7 @@
 
 (clj-record.core/init-model)
 
+;;; map of ascii characters 0-9 A-Z a-z
 (def chars (map char (concat (range 48 57) (range 65 90) (range 97 122))))
 
 (defn random-char
