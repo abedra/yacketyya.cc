@@ -9,7 +9,7 @@
 
 (clj-record.core/init-model)
 
-(def chars (map char (concat (range 48 58) (range 66 92) (range 97 123))))
+(def chars (map char (concat (range 48 57) (range 65 90) (range 97 122))))
 
 (defn random-char
   "Generates a random character"
@@ -22,14 +22,21 @@
   [length]
   (apply str (take length (repeatedly random-char))))
 
-(defn find-by-slug [slug]
-  (first (find-by-sql ["select * from urls where shortened_url = ? limit 1", slug])))
+(defn find-by-slug
+  [slug]
+  (first (find-by-sql ["select * from urls where shortened_url = ?", slug])))
 
-(defn find-or-create [original_url]
-  (let [lookup (first (find-by-sql ["select * from urls where original_url = ? limit 1", original_url]))]
+(defn find-or-create
+  [original_url]
+  (let [lookup (first (find-by-sql ["select * from urls where original_url = ?", original_url]))]
     (if lookup
       lookup
       (create {:original_url original_url :shortened_url (random-string 4)}))))
 
-(defn total-yaccs-shorn []
+(defn total-yaccs-shorn
+  []
   ((first (find-by-sql ["select max(id) from urls"])) :max))
+
+(defn shortened-url
+  [original_url]
+  ((find-or-create original_url) :shortened_url))
