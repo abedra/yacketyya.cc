@@ -1,8 +1,0 @@
-#!/bin/sh
-CLASSPATH=src:templates
-
-for f in lib/*.jar; do
-    CLASSPATH=$CLASSPATH:$f
-done
-
-java -cp $CLASSPATH clojure.main -i src/server.clj

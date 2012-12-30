@@ -1,13 +1,8 @@
 (ns yacketyyacc.models.url
-  (:require clj-record.boot))
+  (:refer-clojure :exclude [chars])
+  (:require [clojure.java.jdbc :as sql]))
 
-(def db {:classname "org.postgresql.Driver"
-         :subprotocol "postgresql"
-         :subname "yacketyyacc"
-         :user "yacketyyacc"
-         :password "yacketyyacc"})
-
-(clj-record.core/init-model)
+(def db "postgres://localhost/yacketyyacc")
 
 ;;; map of ascii characters 0-9 A-Z a-z
 (def chars (map char (concat (range 48 57) (range 65 90) (range 97 122))))
@@ -25,20 +20,32 @@
 
 (defn find-by-original-url
   [original_url]
-  (first (find-by-sql ["select * from urls where original_url = ?", original_url])))
+  (sql/with-connection db
+    (sql/with-query-results results
+      ["select * from urls where original_url = ?", original_url]
+      (first results))))
 
 (defn find-by-slug
   [slug]
-  (first (find-by-sql ["select * from urls where shortened_url = ?", slug])))
+  (sql/with-connection db
+    (sql/with-query-results results
+      ["select * from urls where shortened_url = ?", slug]
+      (first results))))
 
 (defn find-or-create
   [original_url]
   (or (find-by-original-url original_url)
-      (create {:original_url original_url :shortened_url (random-string 4)})))
+      (sql/with-connection db
+        (sql/insert-values :urls
+                           [:original_url :shortened_url]
+                           [original_url (random-string 4)]))))
 
 (defn total-yaccs-shorn
   []
-  ((first (find-by-sql ["select max(id) from urls"])) :max))
+  (sql/with-connection db
+    (sql/with-query-results results
+      ["select max(id) from urls"]
+      ((first results) :max))))
 
 (defn shortened-url
   [original_url]

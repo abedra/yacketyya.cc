@@ -1,22 +1,23 @@
 (ns yacketyyacc.main
-  (:use compojure
-        clojure.contrib.logging
-        relevance.string-template
-        yacketyyacc.handlers.logging)
-  (:require [yacketyyacc.models.url :as url]
-            [yacketyyacc.controllers.urls :as urls]))
+  (:use [compojure.core :only (defroutes GET POST)]
+        [ring.adapter.jetty :only (run-jetty)])
+  (:require [compojure.handler :as handler]
+            [compojure.route :as route]
+            [yacketyyacc.controllers.main :as main]
+            [yacketyyacc.views.main :as views]
+            [yacketyyacc.handlers.logging :as logging]))
 
-(defn index [params]
-  (render-template "index"
-                   {:total (or (url/total-yaccs-shorn) 0)}))
+(defroutes routes
+  (GET "/" [] (views/index))
+  (POST "/" [url] (main/create url))
+  (GET "/about" [] (views/about))
+  (GET "/:id" [id] (main/show id))
+  (route/resources "/"))
 
-(defn about []
-  (render-template "about" {}))
+(def application
+  (-> (handler/site routes)
+      logging/with-logging))
 
-(defroutes yacketyyacc
-  (GET  "/"         (standard-route index))
-  (POST "/"         (standard-route urls/create))
-  (GET  "/:url"     (standard-route urls/show))
-  (GET  "/about"    (about))
-  (GET  "/assets/*" (or (serve-file (params :*)) :next))
-  (ANY  "*"         (page-not-found)))
+(defn -main []
+  (run-jetty (var application) {:port 8080
+                                :join? false}))
